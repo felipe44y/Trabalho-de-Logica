@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../styles/App.css';
 
-export default function T2(){
+export default function Extra(){
     const [classValue, setClassValue] = useState(null);
     
     function ocorrencias(text){
@@ -50,9 +50,8 @@ export default function T2(){
     }
     return(
         <>
-            <h1>Verificador de preposições</h1>
             <div className='inputArea'>
-                <h2>Conversor</h2>
+                <h2>Questão Extra</h2>
                 <ul style={{border: '1px dotted',textAlign:'initial', position: 'absolute', right: 15, top: 15}}>
                     <li>Negação: -</li>
                     <li>Conjução: &</li>
