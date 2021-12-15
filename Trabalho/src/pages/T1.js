@@ -13,9 +13,9 @@ export default function T1(){
         operadores = '';
 
         if(text[text.length-1] !== ')' || (text[0] !== '-' && text[0] !== '('))
-            return 'Toda a preposição deve está entre parênteses!';
+            return 'Erro';
         if(contOpen !== contClose)
-            return 'Está faltando parênteses!';
+            return 'Erro';
 
         text = text.replace(/([()])/g, '');
         
@@ -33,17 +33,17 @@ export default function T1(){
         } 
 
         if(operadores === '')
-            return 'Está faltando operadores!';
+            return 'Erro';
         if((contOpen + contClose)/contOp !== 2)
-            return 'Está com excesso de parênteses!';
+            return 'Erro';
 
         for (let i = 0; i < text.length; i++){
             if(operadores.indexOf(text[i]) !== -1){
                 if(!text[i+1] || (operadores.indexOf(text[i-1]) !== -1 || operadores.indexOf(text[i+1]) !== -1)) 
-                    return 'Preposição está incompleta!';
+                    return 'Incompleta!';
             }else{
                 if(text[i] >= '0' && text[i] <= '9')
-                    return 'Não é permitido números!'
+                    return 'Erro'
                 if(text[i] === '-'){
                     if(i === 0 && !text[i+1])
                         return 'Preposição está incompleta';
@@ -52,7 +52,7 @@ export default function T1(){
                         return 'Preposição está incompleta';
                     
                 }else if(text[i+1] && operadores.indexOf(text[i+1]) === -1 ) 
-                    return 'Preposição possui muitos atomos!';
+                    return 'Erro';
             }
         }
         return '';
@@ -114,11 +114,10 @@ export default function T1(){
     }
     return(
         <>
-        <NavBar/>
             <h1>Verificador de preposições</h1>
             <div className='inputArea'>
-                <h2>Operadores</h2>
-                <ul style={{border: '1px dotted',borderRadius: '10px', textAlign:'initial'}}>
+                <h2>Verificador</h2>
+                <ul style={{border: '1px dotted', textAlign:'initial', position: 'absolute', right: 15, top: 15}}>
                     <li>Negação: -</li>
                     <li>Conjução: &</li>
                     <li>Disjunção: #</li>
@@ -126,7 +125,7 @@ export default function T1(){
                     <li>Auxiliares: (  )</li>
                 </ul>
                 <div style={{margin:10}}>
-                    Digite a preposição: <input id='logica' className='input'></input>
+                    Preposição: <input id='logica' className='input'></input>
                     <button className="BtnVerificar" onClick={()=>verificar()}>Verificar</button>
                 </div>
                 <div>
