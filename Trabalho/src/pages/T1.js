@@ -87,6 +87,36 @@ export default function T1(){
         }
         return indices;
     }
+    function converter(){
+        const formula = String(document.getElementById('logica').value.replace(/\s/g, ''));
+        const indices = ocorrencias(formula);
+        const resultado2 = document.getElementById('Conversor');
+
+        for(let i = 0; i < indices.length; i += 2){
+            let teste = formula.substring(indices[i], indices[i+1]) 
+            let y = teste.indexOf(">");
+            if(y != -1){
+                teste = '(' + '-' + teste.substring(1,y) + '#' + teste.substring(y+1,teste.length)+')'
+            }
+            y = teste.indexOf("#");
+            if(y != -1 && teste[y-3] == '-'){
+                teste = '(' + '-' + teste.substring(2,y) + '&' + '-' + teste.substring(y+1,teste.length)+')'
+                console.log(teste)
+            }
+            y = teste.indexOf("&");
+            if(y != -1 && teste[y-3] == '-'){
+                teste = '(' + '-' + teste.substring(2,y) + '#' + '-' + teste.substring(y+1,teste.length)+')'
+                console.log(teste)
+            }
+            y = teste.indexOf("-");
+            if(y != -1 && teste[y+1] == '-'){
+                teste = teste.substring(0,y) + teste.substring(y+2,teste.length) + ')'
+                console.log(teste)
+            }
+            resultado2.innerHTML = teste ;
+        }
+
+    }
 
     function verificar(){
         const formula = String(document.getElementById('logica').value.replace(/\s/g, ''));
@@ -106,6 +136,28 @@ export default function T1(){
             if(validar === ''){
                 setClassValue('responseTrue');
                 resultado.innerHTML = 'É uma preposição';
+                for(let i = 0; i < indices.length; i += 2){
+                    let teste = formula.substring(indices[i], indices[i+1]) 
+                    let y = teste.indexOf(">");
+                    if(y != -1){
+                        teste = '(' + '-' + teste.substring(1,y) + '#' + teste.substring(y+1,teste.length)+')'
+                    }
+                    y = teste.indexOf("#");
+                    if(y != -1 && teste[y-3] == '-'){
+                        teste = '(' + '-' + teste.substring(2,y) + '&' + '-' + teste.substring(y+1,teste.length)+')'
+                        console.log(teste)
+                    }
+                    y = teste.indexOf("&");
+                    if(y != -1 && teste[y-3] == '-'){
+                        teste = '(' + '-' + teste.substring(2,y) + '#' + '-' + teste.substring(y+1,teste.length)+')'
+                        console.log(teste)
+                    }
+                    y = teste.indexOf("-");
+                    if(y != -1 && teste[y+1] == '-'){
+                        teste = teste.substring(0,y) + teste.substring(y+2,teste.length) + ')'
+                        console.log(teste)
+                    }
+                }
             }else{
                 setClassValue('responseFalse');
                 resultado.innerHTML = 'Não é uma preposição - ' + validar;
@@ -129,7 +181,13 @@ export default function T1(){
                     <button className="BtnVerificar" onClick={()=>verificar()}>Verificar</button>
                 </div>
                 <div>
-                    <p className={classValue} id='resultado'></p> 
+                    <p className={classValue} id='resultado'/>
+                </div>
+                <h2>Conversor</h2>
+                    Preposição: <input id='conversor' className='input'></input>
+                    <button className="Btnconverter" onClick={()=>converter()}>Verificar</button>
+                <div>
+                    <p className={classValue} id='Conversor'/>
                 </div>
             </div>
         </>
